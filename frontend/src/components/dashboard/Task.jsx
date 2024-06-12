@@ -104,7 +104,7 @@ const Task = () => {
     }
   };
 
-  const handleUpdateTask = (event) => {
+  const handleUpdateTask =async (event) => {
     event.preventDefault();
     if (selectedTask && title && description && deadline) {
       dispatch(
@@ -113,6 +113,7 @@ const Task = () => {
           taskData: { title, description, deadline },
         })
       );
+      await dispatch(fetchTasks());
       handleCloseUpdateDrawer();
     }
   };
@@ -126,10 +127,12 @@ const Task = () => {
         taskStatus: newStatus,
       })
     );
+     dispatch(fetchTasks());
   };
 
   const handleMarkAsComplete = (taskId) => {
     dispatch(markTaskAsComplete(taskId));
+     dispatch(fetchTasks());
   };
   const handleDisplayModeChange = (mode) => {
     setDisplayMode(mode);

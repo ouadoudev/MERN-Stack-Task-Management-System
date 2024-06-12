@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
@@ -7,9 +7,6 @@ const initialState = {
   error: null,
   isAuthenticated: false,
 };
-
-export const setUserRole = createAction('auth/setUserRole');
-
 
 export const registerUser = createAsyncThunk(
     'auth/registerUser',
@@ -28,13 +25,12 @@ export const registerUser = createAsyncThunk(
   
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
-  async (userData, { dispatch, rejectWithValue }) => { 
+  async (userData, { rejectWithValue }) => { 
     try {
       const response = await axios.post('/auth/login', userData, {
         headers: { "Content-Type": "application/json" },
       });
       localStorage.setItem('user', JSON.stringify(response.data)); 
-      dispatch(setUserRole(response.data.role)); 
       console.log(response.data);
       return response.data;
     } catch (error) {
@@ -76,9 +72,6 @@ export const authSlice = createSlice({
         state.status = 'failed';
         state.error = action.payload;
         state.isAuthenticated = false;
-      })
-      .addCase(setUserRole, (state, action) => {
-        state.role = action.payload;
       })
 
       .addCase(registerUser.pending, (state) => {

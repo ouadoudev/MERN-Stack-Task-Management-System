@@ -175,14 +175,13 @@ const taskSlice = createSlice({
       })
 
       .addCase(updateTask.fulfilled, (state, action) => {
-        const index = state.tasks.findIndex(
-          task => task._id === action.payload.id
-        );
-        if (index !== -1) {
+        const index = state.tasks.findIndex(task => task._id === action.payload.id);
+        if (index!== -1) {
           state.tasks[index] = action.payload;
+        } else {
+          state.tasks = state.tasks.map(task => task._id === action.payload.id? action.payload : task);
         }
       })
-
       .addCase(updateTask.rejected, (state, action) => {
         state.error = action.payload;
       })
