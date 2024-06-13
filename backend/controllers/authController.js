@@ -181,7 +181,7 @@ const updateUser = async (req, res) => {
     const updateData = { username, password }; 
 
     if (password) {
-      const hashedPassword = await bcrypt.hash(updateData.password, 10); // Hash the password before saving it
+      const hashedPassword = await bcrypt.hash(updateData.password, 10); 
       updateData.password = hashedPassword;
     }
 
@@ -233,8 +233,8 @@ const requestReset = async (req, res) => {
         to: user.email,
         subject: "Password Reset",
         text: `You have requested the reset of the password for your account.\n\n
-                     Please click on the following link: http://localhost:3000/auth/api/password/reset/verify/${code}\n\n
-                     The link will expire in 5 minutes.\n\n
+                     Your verification Code: ${code}\n\n
+                     The code will expire in 5 minutes.\n\n
                      If you did not request this, please ignore this email and your password will remain unchanged.\n`,
       };
   

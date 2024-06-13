@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { loginUser } from '@/store/authSlice';
 import { Form } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate= useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,6 +24,9 @@ const Login = () => {
     }
   };
 
+  const handleForgetPassword = () => {
+    navigate (`/password-reset`); 
+  };
   // Check if the user is already authenticated
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
@@ -64,7 +68,17 @@ const Login = () => {
                 required
                 className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                 placeholder="***************"
-              />
+              />   
+             <div className="w-full flex justify-end">
+                <Button
+                  type="button"
+                  className=" bg-transparent h-4 text-sm text-indigo-600 hover:text-white"
+                  onClick={handleForgetPassword}
+                >
+                  Forgot Password?
+                </Button>
+              </div>
+            
               <Button
                className="bg-[#090909] w-[300px] h-9 mt-3"
                 type="submit"

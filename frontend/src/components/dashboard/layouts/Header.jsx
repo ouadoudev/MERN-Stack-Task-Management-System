@@ -29,7 +29,7 @@ const Header = () => {
     return <div>User not found</div>;
   }
 
-  const userImageSrc = user.user_image ? user.user_image.url : "/profile.png";
+  const userImageSrc ="/profile.png";
 
   const handleProfileUpdate = () => {
     navigate (`/update/profile/${user.id}`); 
@@ -41,7 +41,7 @@ const Header = () => {
     window.location.replace('/');
   };
   return (
-    <header className="z-40  items-center  sticky top-0 bg-white shadow-lg dark:bg-gray-700 rounded-2xl">
+    <header className="z-40  items-center h-16 sticky top-0 bg-white shadow-lg dark:bg-gray-700 rounded-xl">
       <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
         <div className="relative flex items-center w-full pl-1 lg:max-w-68 sm:pr-2 sm:ml-0">
           <div className="container relative left-0 z-50 flex w-3/4 h-full">

@@ -206,17 +206,35 @@ const Task = () => {
       <main className="flex-1 p-6">
         <div className="my-4">
           {displayMode === "cards" ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {myTask.map((task) => (
                 <Card key={task.id}>
                   <CardHeader>
+                  {task.completed === false ? (
+                        <div
+                          className={`px-2 py-1 rounded-full text-xs text-center font-medium cursor-pointer ${
+                            task.taskStatus === "todo"
+                              ? "bg-red-100 text-red-500"
+                              : task.taskStatus === "in progress"
+                              ? "bg-yellow-100 text-yellow-500"
+                              : "bg-green-100 text-green-500"
+                          }`}
+                          onClick={() => handleChangeTaskStatus(task)}
+                        >
+                          {task.taskStatus}
+                        </div>
+                      ) : (
+                        <div className="px-2 py-1 rounded-full text-xs font-medium cursor-pointer bg-green-100 text-green-500">
+                          {task.taskStatus}
+                        </div>
+                      )}
                     <CardTitle>
                       <div className="flex justify-between items-center">
-                        <div className="text-lg">{task.title}</div>
+                        <div className="text-sm">{task.title}</div>
                       </div>
                       {task.user && task.user.username && (
                         <div className="my-1 text-sm">
-                          <h3>by: {task.user.username} </h3>
+                          <h6>by: {task.user.username} </h6>
                           <p className="text-gray-500">
                             at:{" "}
                             {new Date(task.createdAt).toLocaleDateString(
@@ -236,28 +254,9 @@ const Task = () => {
                           timeZone: "UTC",
                         })}
                       </div>
-
-                      {task.completed === false ? (
-                        <div
-                          className={`px-2 py-1 rounded-full text-xs font-medium cursor-pointer ${
-                            task.taskStatus === "todo"
-                              ? "bg-red-100 text-red-500"
-                              : task.taskStatus === "in progress"
-                              ? "bg-yellow-100 text-yellow-500"
-                              : "bg-green-100 text-green-500"
-                          }`}
-                          onClick={() => handleChangeTaskStatus(task)}
-                        >
-                          {task.taskStatus}
-                        </div>
-                      ) : (
-                        <div className="px-2 py-1 rounded-full text-xs font-medium cursor-pointer bg-green-100 text-green-500">
-                          {task.taskStatus}
-                        </div>
-                      )}
                     </div>
                   </CardContent>
-                  <CardFooter className="flex justify-between items-center mb-1">
+                  <CardFooter className="flex justify-around items-center mb-2  mx-16">
                     {task.completed == false && (
                       <div className="flex gap-2">
                         <Button

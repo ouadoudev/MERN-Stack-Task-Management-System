@@ -14,6 +14,7 @@ import EmailSent from "./components/profile/EmailSent";
 
 import UpdateUser from "./components/profile/updateProfile";
 import Task from "./components/dashboard/Task";
+import PasswordResetForm from "./components/profile/PasswordResetForm";
 
 axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
@@ -30,6 +31,8 @@ const App = () => {
           <Route path="/tasks" element={<Task />} />
           <Route path="/calendar" element={<Calendar />} />
         </Route>
+  
+        <Route path="/password-reset" element={<PasswordResetForm />} />
         <Route path={`/update/profile/:id`} element={<UpdateUser />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/email-sent" element={<EmailSent />} />

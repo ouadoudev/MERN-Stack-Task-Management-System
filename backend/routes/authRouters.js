@@ -24,10 +24,10 @@ router.post('/logout',isAuthenticated,controllers.Logout);
 router.get("/:userId",isAuthenticated, controllers.findUser);
 
 //route for updating user
-router.put('/:userId',controllers.updateUser) 
+router.put('/:userId',isAuthenticated,controllers.updateUser) 
 
 // Route to request password reset
-router.post('/password/reset',isAuthenticated, controllers.requestReset);
+router.post('/password/reset',controllers.requestReset);
 
 
 // Route to verify password reset token

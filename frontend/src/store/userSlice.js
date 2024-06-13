@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { loggedUser } from "./authSlice";
 
 export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
@@ -25,15 +26,22 @@ export const fetchUserById = createAsyncThunk(
   }
 );
 
-// Thunk to handle the update user action
 export const updateUser = createAsyncThunk(
   'user/updateUser',
-  async ({ id, username, user_image, password }, { rejectWithValue }) => {
+  async ({ id, userData },{ getState, rejectWithValue }) => {
     try {
-      const response = await axios.put(`/users/${id}`, {
-        username,
-        user_image,
-        password,
+      const state = getState();
+      const user = loggedUser(state);
+
+      if (!user || !user.id || !user.token) {
+        throw new Error("User not authenticated");
+      }
+      // Make API call to update user
+      const response = await axios.put(`/auth/${id}`, userData, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
+        },
       });
       return response.data;
     } catch (error) {
@@ -41,6 +49,7 @@ export const updateUser = createAsyncThunk(
     }
   }
 );
+
 export const deleteUser = createAsyncThunk(
   "users/deleteUser",
   async (userId, { rejectWithValue }) => {
@@ -93,15 +102,17 @@ const userSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(updateUser.pending, (state) => {
-        state.status = 'loading';
+        state.loading = true;
+        state.error = null;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        state.status = 'succeeded';
         state.user = action.payload;
+        state.loading = false;
+        state.error = null;
       })
       .addCase(updateUser.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.payload;
+        state.loading = false;
+        state.error = action.error.message;
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.users = state.users.filter((user) => user._id !== action.payload);
