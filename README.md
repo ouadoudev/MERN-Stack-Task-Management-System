@@ -29,12 +29,9 @@ Follow these steps to run The application on your local machine:
 
    Open a terminal and navigate to the `backend` directory of the cloned repository:
 
-   ```bash
- cd MERN Stack Task Manager\backend
-npm install  
- npm start .\server
- nodemon .\server.js
- 
+    ```bash
+   git clone https://github.com/ouadoudev/MERN-Stack-Task-Management-System.git
+   ```
 2. **Start the Frontend App:**
 
    Open a terminal and navigate to the `frontend` directory of the cloned repository:
