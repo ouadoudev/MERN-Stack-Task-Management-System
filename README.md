@@ -31,10 +31,20 @@ Follow these steps to run The application on your local machine:
 
     ```bash
  cd MERN Stack Task Manager\backend
-npm install  
- npm start .\server
- nodemon .\server.js
    ```
+Install the project's dependencies:
+```bash
+npm install  
+```
+Start the backend server in development mode. There are two options:
+Option 1 using `npm start`:
+```bash
+ npm start .\server
+```
+Option 2 using `nodemon` for automatic restarts:
+```bash
+ nodemon .\server.js
+```
 2. **Start the Frontend App:**
 
    Open a terminal and navigate to the `frontend` directory of the cloned repository:
