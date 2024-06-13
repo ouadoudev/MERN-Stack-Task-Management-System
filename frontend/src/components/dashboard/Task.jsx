@@ -208,133 +208,121 @@ const Task = () => {
           {displayMode === "cards" ? (
             <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {myTask.map((task) => (
-                <Card key={task.id}>
-                  <CardHeader>
-                  {task.completed === false ? (
-                        <div
-                          className={`px-2 py-1 rounded-full text-xs text-center font-medium cursor-pointer ${
-                            task.taskStatus === "todo"
-                              ? "bg-red-100 text-red-500"
-                              : task.taskStatus === "in progress"
-                              ? "bg-yellow-100 text-yellow-500"
-                              : "bg-green-100 text-green-500"
-                          }`}
-                          onClick={() => handleChangeTaskStatus(task)}
-                        >
-                          {task.taskStatus}
-                        </div>
-                      ) : (
-                        <div className="px-2 py-1 rounded-full text-xs font-medium cursor-pointer bg-green-100 text-green-500">
-                          {task.taskStatus}
-                        </div>
-                      )}
-                    <CardTitle>
-                      <div className="flex justify-between items-center">
-                        <div className="text-sm">{task.title}</div>
-                      </div>
-                      {task.user && task.user.username && (
-                        <div className="my-1 text-sm">
-                          <h6>by: {task.user.username} </h6>
-                          <p className="text-gray-500">
-                            at:{" "}
-                            {new Date(task.createdAt).toLocaleDateString(
-                              "en-US",
-                              { timeZone: "UTC" }
-                            )}
-                          </p>
-                        </div>
-                      )}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="mb-2">{task.description}</div>
-                    <div className="flex justify-between items-center">
-                      <div className="text-gray-500">
-                        {new Date(task.deadline).toLocaleDateString("en-US", {
-                          timeZone: "UTC",
-                        })}
-                      </div>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-around items-center mb-2  mx-16">
-                    {task.completed == false && (
-                      <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          onClick={() => handleMarkAsComplete(task._id)}
-                        >
-                          Mark as Done
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleOpenUpdateDrawer(task)}
-                        >
-                          Update
-                        </Button>
-                      </div>
-                    )}
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleDeleteTask(task._id)}
-                    >
-                      Delete
-                    </Button>
-                  </CardFooter>
-                </Card>
+  <Card key={task.id} className="shadow-lg rounded-lg overflow-hidden">
+  <CardHeader className="p-4 bg-white border-b border-gray-200">
+    <div className="flex items-center justify-between">
+      <div
+        className={`px-3 py-1 rounded-full text-xs text-center font-medium cursor-pointer ${
+          task.completed === false
+            ? task.taskStatus === "todo"
+              ? "bg-red-100 text-red-500"
+              : task.taskStatus === "in progress"
+              ? "bg-yellow-100 text-yellow-500"
+              : "bg-green-100 text-green-500"
+            : "bg-green-100 text-green-500"
+        }`}
+        onClick={() => handleChangeTaskStatus(task)}
+      >
+        {task.taskStatus}
+      </div>
+    </div>
+    <div className="mt-2">
+      <div className="text-lg font-semibold">{task.title}</div>
+      {task.user && task.user.username && (
+        <div className="mt-1 text-sm text-gray-600">
+          <h6>by: {task.user.username}</h6>
+          <p>
+            at:{" "}
+            {new Date(task.createdAt).toLocaleDateString("en-US", {
+              timeZone: "UTC",
+            })}
+          </p>
+        </div>
+      )}
+    </div>
+  </CardHeader>
+  <CardContent className="p-4">
+    <div className="mb-2">
+      <span className="font-medium">Objectif: </span> {task.description}
+    </div>
+    <div className="flex justify-between items-center text-sm text-gray-500">
+      <div>
+        <span className="font-medium">Due: </span>
+        {new Date(task.deadline).toLocaleDateString("en-US", {
+          timeZone: "UTC",
+        })}
+      </div>
+    </div>
+  </CardContent>
+  <CardFooter className="p-4 bg-gray-50 border-t border-gray-200 flex justify-around items-center">
+    {!task.completed && (
+      <div className="flex gap-2">
+        <Button size="sm" onClick={() => handleMarkAsComplete(task._id)}>
+          Mark as Done
+        </Button>
+        <Button variant="outline" size="sm" onClick={() => handleOpenUpdateDrawer(task)}>
+          Update
+        </Button>
+      </div>
+    )}
+    <Button variant="outline" size="sm" onClick={() => handleDeleteTask(task._id)}>
+      Delete
+    </Button>
+  </CardFooter>
+</Card>
+
               ))}
             </div>
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-center">Title</TableHead>
-                  <TableHead className="text-center">Description</TableHead>
-                  <TableHead className="text-center">Deadline</TableHead>
-                  <TableHead className="text-center">Status</TableHead>
-                  <TableHead className="text-center">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {myTask.map((task) => (
-                  <TableRow key={task.id}>
-                    <TableCell className="text-center">{task.title}</TableCell>
-                    <TableCell className="text-center">
-                      {task.description}
-                    </TableCell>
-                    <TableCell className="text-center">
-                      {new Date(task.deadline).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell className=" items-center">
-                      <div
-                        className={`px-2 py-1 rounded-full text-xs text-center font-medium cursor-pointer ${
-                          task.taskStatus === "todo"
-                            ? "bg-red-100 text-red-500 "
-                            : task.taskStatus === "in progress"
-                            ? "bg-yellow-100 text-yellow-500"
-                            : "bg-green-100 text-green-500"
-                        }`}
-                      >
-                        {task.taskStatus}
-                      </div>
-                    </TableCell>
-                    <TableCell className="flex justify-around items-center">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleDeleteTask(task._id)}
-                      >
-                        Delete
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        Update
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+<Table className="min-w-full leading-normal shadow-lg rounded-lg overflow-hidden">
+  <TableHeader className="bg-gray-100">
+    <TableRow>
+      <TableHead className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Title</TableHead>
+      <TableHead className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Description</TableHead>
+      <TableHead className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Deadline</TableHead>
+      <TableHead className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</TableHead>
+      <TableHead className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {myTask.map((task) => (
+      <TableRow key={task.id} className="bg-white hover:bg-gray-100">
+        <TableCell className="px-5 py-2 border-b border-gray-200 text-center text-sm">{task.title}</TableCell>
+        <TableCell className="px-5 py-2 border-b border-gray-200 text-center text-sm">{task.description}</TableCell>
+        <TableCell className="px-5 py-2 border-b border-gray-200 text-center text-sm">{new Date(task.deadline).toLocaleDateString()}</TableCell>
+        <TableCell className="px-5 py-2 border-b border-gray-200 text-center text-sm">
+          {task.completed === false ? (
+            <div
+              className={`px-2 py-1 rounded-full text-xs text-center font-medium cursor-pointer ${
+                task.taskStatus === "todo"
+                  ? "bg-red-100 text-red-500"
+                  : task.taskStatus === "in progress"
+                  ? "bg-yellow-100 text-yellow-500"
+                  : "bg-green-100 text-green-500"
+              }`}
+              onClick={() => handleChangeTaskStatus(task)}
+            >
+              {task.taskStatus}
+            </div>
+          ) : (
+            <div className="px-2 py-1 rounded-full text-xs font-medium cursor-pointer bg-green-100 text-green-500">
+              {task.taskStatus}
+            </div>
+          )}
+        </TableCell>
+        <TableCell className="px-5 py-2 mt-2  border-gray-200  text-center text-sm flex">
+          <Button variant="outline" size="sm" onClick={() => handleDeleteTask(task._id)}>
+            Delete
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => handleOpenUpdateDrawer(task)}>
+            Update
+          </Button>
+        </TableCell>
+      </TableRow>
+    ))}
+  </TableBody>
+</Table>
+
           )}
         </div>
       </main>

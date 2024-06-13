@@ -4,9 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 import Layout from "./components/dashboard/layouts/Layout";
-import Calendar from "./components/dashboard/Calendar";
-
-import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import VerifyEmail from "./components/profile/verifyEmail";
@@ -24,14 +21,11 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
         <Route path="/" element={<Layout />}>
           <Route path="/tasks" element={<Task />} />
-          <Route path="/calendar" element={<Calendar />} />
         </Route>
-  
         <Route path="/password-reset" element={<PasswordResetForm />} />
         <Route path={`/update/profile/:id`} element={<UpdateUser />} />
         <Route path="/verify-email" element={<VerifyEmail />} />

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import {
   FiClipboard,
-  FiCalendar,
 } from "react-icons/fi";
 import { ChevronFirst, ChevronLast } from "lucide-react";
 import { useState } from "react";
@@ -51,27 +50,6 @@ const Sidebar = () => {
               }`}
             >
               Tasks
-            </span>
-          </Link>
-          <Link
-            to="/calendar"
-            className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors 
-            ${
-              active === "/calendar"
-                ? "bg-gradient-to-tr from-slate-200 to-slate-100 text-blue-800"
-                : ""
-            }
-          `}
-            onClick={() => handleActive("/calendar")}
-          >
-            <FiCalendar />
-
-            <span
-              className={`font-medium overflow-hidden transition-all ${
-                expanded ? "w-44 ml-3" : "w-0"
-              }`}
-            >
-              Calendar
             </span>
           </Link>
         </div>

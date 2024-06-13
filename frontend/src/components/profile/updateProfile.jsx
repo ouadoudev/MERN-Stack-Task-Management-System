@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { logout, loggedUser } from '@/store/authSlice'; // Import logout action
+import { logout, loggedUser } from '@/store/authSlice'; 
 import { toast } from 'react-toastify';
 
 const UpdateProfile = () => {
@@ -26,7 +26,7 @@ const UpdateProfile = () => {
     setEmail(user?.email || "");
   }, [user]);
 
-  // Handle form submission
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,7 +39,7 @@ const UpdateProfile = () => {
 
     try {
       setLoading(true);
-      // Dispatch async action to update user
+  
       await dispatch(updateUser({ id: id, userData }));
       setLoading(false);
 
@@ -53,7 +53,7 @@ const UpdateProfile = () => {
     } catch (error) {
       setLoading(false);
       setError(error.message || 'An error occurred');
-      // Handle error scenario, e.g., show error message
+    
     }
   };
 
