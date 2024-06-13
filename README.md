@@ -23,34 +23,66 @@ These instructions will get you a copy of the project up and running on your loc
    ```
 ### Running the Application
 
-Follow these steps to run The application on your local machine:
+This guide will walk you through setting up and running The application on your local machine. 
+
+**Prerequisites:**
+
+* Node.js and npm (or yarn) installed on your system. You can check installation guides at the official Node.js website: [URLnodejs org]
+
+**Steps:**
 
 1. **Start the Backend Server:**
 
-   Open a terminal and navigate to the `backend` directory of the cloned repository:
+   - Open a terminal or command prompt.
+   - Navigate to the `backend` directory of your cloned repository. You can achieve this using the following command:
 
-    ```bash
- cd MERN Stack Task Manager\backend
-   ```
-Install the project's dependencies:
-```bash
-npm install  
-```
-Start the backend server in development mode. There are two options:
-Option 1 using `npm start`:
-```bash
- npm start .\server
-```
-Option 2 using `nodemon` for automatic restarts:
-```bash
- nodemon .\server.js
-```
+     ```bash
+     cd \MERN Stack Task Manager\backend
+     ```
+
+   - Install the project's dependencies:
+
+     ```bash
+     npm install
+     ``` 
+
+   - Start the backend server in development mode. There are two options:
+
+     - Option 1 (using `npm start`):
+
+       ```bash
+       npm start
+       ```
+
+     - Option 2 (using `nodemon` for automatic restarts):
+
+       ```bash
+       nodemon ./server.js
+       ```
+
 2. **Start the Frontend App:**
 
-   Open a terminal and navigate to the `frontend` directory of the cloned repository:
+   - Open a separate terminal or command prompt window.
+   - Navigate to the `frontend` directory of your cloned repository:
 
-   ```bash
- cd MERN Stack Task Manager\fronend
-   npm install  
- npm run dev
-  ```
+     ```bash
+     cd \MERN Stack Task Manager\frontend
+     ```
+
+   - Install the project's frontend dependencies:
+
+     ```bash
+     npm install
+     ``` 
+
+   - Start the frontend development server:
+
+     ```bash
+     npm run dev
+     ``` 
+
+**Explanation:**
+
+* We use separate terminal windows for backend and frontend as they are typically run concurrently during development.
+* `nodemon` is a helpful tool that automatically restarts the backend server whenever you make changes to the code, saving you the time of manually restarting it.
+
