@@ -1,0 +1,77 @@
+Documentation de l'API d'authentification et de gestion des utilisateurs
+
+Introduction :
+
+Cette documentation décrit les fonctionnalités et l'utilisation d'une API 
+d'authentification et de gestion des utilisateurs implémentée avec Node.js
+ et MongoDB. L'API propose des endpoints pour l'enregistrement des utilisateurs,
+  la vérification par email, la connexion, la déconnexion, la récupération 
+  des utilisateurs, la mise à jour des détails utilisateur, ainsi que 
+  les fonctionnalités de réinitialisation de mot de passe.
+
+Technologies Utilisées :
+
+** Node.js
+** MongoDB (avec Mongoose pour la modélisation)
+** Express.js (pour le routage de l'API)
+** bcrypt (pour le hachage des mots de passe)
+** jsonwebtoken (JWT) (pour l'authentification)
+** validator (pour la validation des entrées)
+** nodemailer (pour l'envoi d'emails)
+** crypto (pour la génération de codes aléatoires)
+
+Endpoints de l'API :
+
+1. Enregistrer un Nouvel Utilisateur
+Endpoint: POST /auth/register
+Description: Enregistre un nouvel utilisateur avec un email unique.
+ Envoie un email de vérification pour la confirmation de l'email.
+
+ 2. Vérifier l'Email
+Endpoint: POST /auth/verify-email
+Description: Vérifie l'email de l'utilisateur basé sur le jeton reçu via email.
+
+3. Connexion de l'Utilisateur
+Endpoint: POST /auth/login
+Description: Authentifie les identifiants de l'utilisateur et fournit un jeton JWT pour les requêtes suivantes.
+
+4. Déconnexion de l'Utilisateur
+Endpoint: POST /auth/logout
+Description: Déconnecte l'utilisateur actuellement authentifié en invalidant le jeton JWT.
+
+5. Trouver un Utilisateur par ID
+Endpoint: GET /users/:userId
+Description: Récupère les détails de l'utilisateur basé sur l'ID utilisateur.
+
+6. Mettre à Jour un Utilisateur
+Endpoint: PUT /users/:userId
+Description: Met à jour les détails de l'utilisateur basé sur l'ID utilisateur.
+
+7. Demander la Réinitialisation du Mot de Passe
+Endpoint: POST /auth/request-reset
+Description: Initie une demande de réinitialisation du mot de passe en envoyant un code de vérification via email.
+
+8. Valider le Code de Réinitialisation du Mot de Passe
+Endpoint: GET /auth/validate-reset/:code
+Description: Valide le code/token de réinitialisation du mot de passe.
+
+9. Réinitialiser le Mot de Passe de l'Utilisateur
+Endpoint: POST /auth/reset-password/:code
+Description: Réinitialise le mot de passe de l'utilisateur basé sur le token 
+de réinitialisation fourni.
+
+Gestion des Erreurs :
+
+L'API gère les erreurs avec des codes d'état HTTP appropriés et des messages
+ d'erreur descriptifs lorsque cela est possible.
+Les erreurs courantes incluent les données manquantes, les identifiants 
+invalides, les tokens expirés et les problèmes du serveur.
+
+Mesures de Sécurité :
+
+Les mots de passe sont hachés à l'aide de bcrypt avant d'être enregistrés
+ dans la base de données.
+Les jetons JWT sont utilisés pour l'authentification et sont validés pour
+ chaque endpoint protégé.
+Les fonctionnalités de vérification d'email et de réinitialisation de
+ mot de passe incluent des délais d'expiration pour des raisons de sécurité.

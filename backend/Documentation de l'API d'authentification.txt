@@ -1,0 +1,49 @@
+Documentation de l'API de Gestion des Tâches
+Introduction
+Cette documentation détaille les endpoints et les fonctionnalités d'une API 
+de gestion des tâches. L'API permet la création, la récupération, la mise à
+ jour, et la suppression de tâches associées à des utilisateurs spécifiques.
+
+Technologies Utilisées
+Node.js
+MongoDB (avec Mongoose pour la modélisation)
+Express.js (pour le routage de l'API)
+
+Endpoints de l'API
+1. Créer une Tâche
+Endpoint: POST /tasks/create
+Description: Crée une nouvelle tâche pour un utilisateur spécifique et 
+l'associe à cet utilisateur.
+
+2. Récupérer les Tâches
+Endpoint: GET /tasks
+Description: Récupère toutes les tâches avec les détails de l'utilisateur associé.
+
+3. Mettre à Jour une Tâche
+Endpoint: PUT /tasks/:id
+Description: Met à jour les détails d'une tâche spécifiée par son ID.
+
+4. Changer le Statut d'une Tâche
+Endpoint: PATCH /tasks/:id/change-status
+Description: Modifie le statut d'une tâche spécifiée par son ID.
+
+5. Marquer une Tâche Comme Complétée
+Endpoint: PATCH /tasks/:id/complete
+Description: Marque une tâche spécifiée par son ID comme complétée.
+
+6. Supprimer une Tâche
+Endpoint: DELETE /tasks/:id
+Description: Supprime une tâche spécifiée par son ID.
+
+Gestion des Erreurs
+L'API gère les erreurs avec des codes d'état HTTP appropriés et des messages 
+d'erreur descriptifs.
+Les erreurs courantes incluent les données manquantes, les tâches non trouvées,
+ et les erreurs de serveur.
+
+Sécurité:
+
+L'API utilise des ID d'utilisateur pour associer les tâches, assurant ainsi
+ une isolation des données par utilisateur.
+Les actions sensibles comme la suppression et la modification de tâches
+ nécessitent une authentification appropriée et sont protégées par des validations de permissions.
