@@ -37,7 +37,7 @@ const swaggerOptions ={
       },
     ],
   }, 
-  apis: ['./routes/*.js'],
+  apis: ['./controllers/*.js'],
 };
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
