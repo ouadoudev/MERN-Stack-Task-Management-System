@@ -34,7 +34,7 @@ Follow these steps to run The application on your local machine:
 npm install  
  npm start .\server
  nodemon .\server.js
-  ```
+ 
 2. **Start the Frontend App:**
 
    Open a terminal and navigate to the `frontend` directory of the cloned repository:
