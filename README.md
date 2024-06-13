@@ -1,4 +1,4 @@
-### Task Manager Application :
+# Task Manager Application :
 Welcome to the Task Manager Application! This project is a full-stack web application designed to manage tasks efficiently. It includes both backend and frontend implementations using the MERN stack (MongoDB, Express.js, React, Node.js).
 
 
@@ -19,7 +19,7 @@ These instructions will get you a copy of the project up and running on your loc
 **Clone the repository:**
    ```bash
    git clone https://github.com/ouadoudev/MERN-Stack-Task-Management-System.git
-   
+   ```
 ### Running the Application
 
 Follow these steps to run The application on your local machine:
@@ -33,7 +33,7 @@ Follow these steps to run The application on your local machine:
    npm install  
    npm start .\server
 or nodemon .\server.js
-
+  ```
 2. **Start the Frontend App:**
 
    Open a terminal and navigate to the `frontend` directory of the cloned repository:
@@ -42,5 +42,4 @@ or nodemon .\server.js
  cd MERN Stack Task Manager\fronend
    npm install  
  npm run dev
-
-   
+  ```
