@@ -13,7 +13,7 @@ import UpdateUser from "./components/profile/updateProfile";
 import Task from "./components/dashboard/Task";
 import PasswordResetForm from "./components/profile/PasswordResetForm";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://taskly-q9iz.onrender.com";
 axios.defaults.withCredentials = true;
 
 const App = () => {
