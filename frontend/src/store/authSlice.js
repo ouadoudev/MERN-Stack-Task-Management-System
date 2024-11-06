@@ -12,7 +12,7 @@ export const registerUser = createAsyncThunk(
     'auth/registerUser',
     async (userData, { rejectWithValue }) => {
       try {
-        const response = await axios.post('/users/register', userData, {
+        const response = await axios.post('/auth/register', userData, {
           headers: { "Content-Type": "multipart/form-data" }, 
         });
         localStorage.setItem('user', JSON.stringify(response.data)); 
@@ -44,7 +44,7 @@ export const authSlice = createSlice({
   reducers: {
     logout: async (state) => {
       try {
-        await axios.post('/users/logout');
+        await axios.post('/auth/logout');
         state.user = null;
         state.token = null;
         state.role = null;
