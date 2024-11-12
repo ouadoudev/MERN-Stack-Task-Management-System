@@ -66,9 +66,9 @@ const Register = async (req, res) => {
 
     // Check if all fields are present
     if (!username || !password || !email) {
-      return res.status(422).json({ errors: [{ msg: "Missing data" }] });
+      return res.status(422).json({ errors: [{ msg: "All fields are required" }] });
     }
-
+  
     if (!validator.isEmail(email)) {
       return res.status(422).json({ errors: [{ msg: "Invalid email" }] });
     }
@@ -77,12 +77,9 @@ const Register = async (req, res) => {
       return res.status(422).json({ errors: [{ msg: "Weak password" }] });
     }
 
-    // Check if user with the same email already exists
-    const newUser = await User.findOne({ email });
-    if (newUser) {
-      return res
-        .status(403)
-        .send({ auth: false, message: "Email already exists." });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ errors: [{ msg: "Email already exists." }] });
     }
 
     const tokenPayload = {
@@ -109,7 +106,7 @@ const Register = async (req, res) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: "Email Verification",
-      html: `Click <a href="${req.protocol}://${req.get('host')}/api/verify-email/${token}">here</a> to verify your email.`,
+      html: `<p>Hello ${username}, Click <a href="${process.env.FRONTEND_BASE_URL}/verify-email?token=${token}">here</a> to verify your email.</p>`,
     });
 
     res.status(201).json({

@@ -13,7 +13,7 @@ export const registerUser = createAsyncThunk(
     async (userData, { rejectWithValue }) => {
       try {
         const response = await axios.post('/auth/register', userData, {
-          headers: { "Content-Type": "multipart/form-data" }, 
+          headers: { "Content-Type": "application/json" }, 
         });
         localStorage.setItem('user', JSON.stringify(response.data)); 
         return  response.data ;
